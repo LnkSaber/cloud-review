@@ -1,0 +1,24 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka #注册的eureka地址
+zuul:
+  routes:
+    user-service:
+      path: /user/**
+      serviceId: user-service
+      strip-prefix: true #是否去除前缀
+  ignored-services:
+    - consumer-service
+#  prefix: /api    #通用的前缀
+
+#zuul:
+#  routes:
+#    user-service: # 这里是路由id，随意写
+#      path: /user-service/** # 这里是映射路径
+#      url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
